@@ -18,10 +18,14 @@ export default function App() {
 			const newGoal: CourseGoal = {
 				id: Math.random(),
 				title: "Learn React + TS",
-				description: "Learn it in depth!",
+				description: "Learn it in depth! " + Math.random().toFixed(3),
 			};
 			return [...prevGoals, newGoal];
 		});
+	};
+
+	const handleDeleteGoal = (id: number) => {
+		setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
 	};
 
 	return (
@@ -30,7 +34,7 @@ export default function App() {
 				<h1>Your Course Goals</h1>
 			</Header>
 			<button onClick={handleAddGoal}>Add Goal</button>
-			<CourseGoalList goals={goals} />
+			<CourseGoalList goals={goals} onDeleteGoal={handleDeleteGoal} />
 		</main>
 	);
 }
